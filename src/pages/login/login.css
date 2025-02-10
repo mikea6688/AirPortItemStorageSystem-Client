@@ -1,0 +1,52 @@
+/* 设置整个页面的背景和布局 */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #6e7dff, #4c6ef5); /* 渐变背景 */
+  }
+  
+  /* 表单容器的样式 */
+  .login-form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* 标题样式 */
+  .login-title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  /* 输入框样式 */
+  .login-input {
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+  
+  /* 登录按钮的样式 */
+  .login-button {
+    border-radius: 8px;
+    background-color: #4c6ef5;
+    border-color: #4c6ef5;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  /* 注册链接的样式 */
+  .register-link {
+    text-align: center;
+  }
+  
+  .link-text {
+    color: #4c6ef5;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  

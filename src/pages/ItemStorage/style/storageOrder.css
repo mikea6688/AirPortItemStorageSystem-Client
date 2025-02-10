@@ -1,0 +1,48 @@
+/* OrderInfoPage.css */
+.order-info-page {
+    background-color: #f4f7fa;
+    min-height: 100vh;
+  }
+  
+  .order-info-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .search-input {
+    width: 200px;
+  }
+  
+  .table-container {
+    background-color: #fff;
+  }
+  
+  .voucher-text-extracted {
+    text-decoration: line-through;
+    color: #bfbfbf;
+  }
+  
+  .status-tag {
+    font-size: 14px;
+  }
+  
+  .status-tag-green {
+    background-color: #52c41a;
+  }
+  
+  .status-tag-orange {
+    background-color: #fa8c16;
+  }
+  
+  .status-tag-blue {
+    background-color: #1890ff;
+  }
+  

@@ -1,0 +1,53 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; /* Full viewport height */
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .current-balance {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .select-amount label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .custom-amount {
+    margin-top: 10px;
+  }
+  
+  .info-text {
+    font-size: 14px;
+    color: #888;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Take available space and push footer to bottom */
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto; /* Ensures the footer stays at the bottom */
+  }
+  
+  .footer button {
+    width: 45%;
+  }
+  

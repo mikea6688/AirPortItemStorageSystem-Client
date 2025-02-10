@@ -1,0 +1,56 @@
+.personal-info-container {
+    padding: 40px;
+    background-color: #f4f7fc;
+  }
+  
+  .info-card {
+    border-radius: 12px;
+    padding: 5px; /* 减少卡片的内边距，缩小高度 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-width: 866px; /* 设置最大宽度，避免卡片过宽 */
+    margin: 0 auto; /* 使卡片居中 */
+    height: 800px;
+  }
+  
+  .avatar-column {
+    text-align: center;
+  }
+  
+  .username {
+    margin-top: 10px; /* 缩小与头像的间距 */
+    font-size: 1.3rem; /* 可以调整字体大小，缩小用户信息显示 */
+  }
+  
+  .form-container {
+    padding-left: 10px;
+  }
+  
+  .form-item {
+    margin-bottom: 10px; /* 缩小表单项之间的间距 */
+  }
+  
+  .readonly-input {
+    background-color: white; /* 确保背景色不影响编辑 */
+    color: #000; /* 使文本颜色适合显示 */
+    cursor: not-allowed; /* 鼠标样式显示不可编辑 */
+  }
+  
+  .save-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  .save-button .ant-btn {
+    width: 120px;
+    height: 40px; /* 缩小按钮的高度 */
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: #1890ff;
+  }
+  
+  .save-button .ant-btn:hover {
+    background-color: #40a9ff;
+  }
+  

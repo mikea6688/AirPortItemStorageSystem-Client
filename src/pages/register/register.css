@@ -1,0 +1,79 @@
+/* 注册页面容器样式 */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f2f2f2; /* 更柔和的背景色 */
+  }
+  
+  .register-form {
+    background: #ffffff; /* 表单背景为白色 */
+    padding: 40px;
+    border-radius: 12px; /* 更圆的圆角 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 更柔和的阴影效果 */
+    width: 100%;
+    max-width: 450px; /* 表单最大宽度 */
+    transition: transform 0.3s ease; /* 添加动画效果 */
+  }
+  
+  .register-form:hover {
+    transform: translateY(-5px); /* 鼠标悬停时卡片上升 */
+  }
+  
+  /* 标题样式 */
+  .form-title {
+    text-align: center;
+    font-size: 28px; /* 稍大一些的字体 */
+    color: #4a90e2; /* 标题颜色 */
+    margin-bottom: 30px;
+  }
+  
+  /* 表单项 */
+  .ant-form-item-label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* 输入框样式 */
+  .ant-input, .ant-input-password {
+    border-radius: 8px; /* 输入框圆角 */
+    border: 1px solid #d9d9d9; /* 输入框边框 */
+    background-color: #f9f9f9; /* 输入框背景色略浅 */
+  }
+  
+  .ant-input:hover, .ant-input-password:hover {
+    border-color: #4a90e2; /* 鼠标悬停时输入框边框颜色 */
+  }
+  
+  .ant-input:focus, .ant-input-password:focus {
+    border-color: #4a90e2; /* 聚焦时边框颜色 */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.4); /* 聚焦时增加边框阴影 */
+  }
+  
+  /* 按钮样式 */
+  .ant-btn-primary {
+    background-color: #4a90e2; /* 按钮背景颜色 */
+    border-color: #4a90e2;
+    border-radius: 8px; /* 按钮圆角 */
+    padding: 10px 10; /* 按钮内边距 */
+    margin-top: 10%;
+  }
+  
+  .ant-btn-primary:hover {
+    background-color: #357ab7; /* 按钮悬停颜色 */
+    border-color: #357ab7;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 600px) {
+    .register-form {
+      padding: 20px; /* 在小屏幕上减少表单内边距 */
+    }
+  
+    .form-title {
+      font-size: 24px; /* 标题大小适应小屏幕 */
+    }
+  }
+  
