@@ -7,6 +7,13 @@ const LogisticsInfo = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  // 状态映射表
+  const statusMap = {
+    Pending: { text: "待处理", color: "orange" },
+    InTransit: { text: "配送中", color: "blue" },
+    Arrived: { text: "已送达", color: "green" },
+    Discarded: { text: "已废弃", color: "red" },
+  };
 
   // 初始化物流信息列表
   const [logisticsData, setLogisticsData] = useState([]);
@@ -68,8 +75,8 @@ const LogisticsInfo = () => {
     },
     {
       title: '是否取出',
-      dataIndex: 'isExtracted',
-      key: 'isExtracted',
+      dataIndex: 'isTakenOut',
+      key: 'isTakenOut',
       render: (text) => (
         <Switch
           checked={text}
@@ -84,20 +91,9 @@ const LogisticsInfo = () => {
       dataIndex: 'logisticsStatus',
       key: 'logisticsStatus',
       render: (status) => {
-        let color;
-        switch (status) {
-          case '在途':
-            color = 'orange';
-            break;
-          case '已送达':
-            color = 'green';
-            break;
-          default:
-            color = 'default';
-            break;
-        }
-        return <Tag color={color}>{status}</Tag>;
-      },
+        const statusInfo = statusMap[status] || { text: "未知状态", color: "gray" };
+        return <Tag color={statusInfo.color}>{statusInfo.text}</Tag>;
+      }
     },
     {
       title: '操作',
@@ -105,6 +101,7 @@ const LogisticsInfo = () => {
       render: (_, record) => (
         <Space size="middle">
           <Button
+            disabled={record.logisticsStatus!=='InTransit' || record.logisticsStatus!=='Pending'}
             type="primary" danger
             onClick={() => handleDiscard(record.key)}
           >
