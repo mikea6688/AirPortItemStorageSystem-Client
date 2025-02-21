@@ -58,12 +58,12 @@ function Storage() {
   
     let setting = storageSettingData.find(setting => 
       setting.sizeType === values.lockerType && 
-      (duration === setting.dateType || duration === "custom")
+      (duration === setting.dateType || (duration === "custom" && setting.dateType === 'OneMonth'))
     );
   
     let basePrice = setting?.price || 0; // 避免 `undefined` 影响计算
 
-    setEstimatedPrice(duration === "custom" ? basePrice * (values.customMonths || 1) : basePrice);
+    setEstimatedPrice(duration === "custom" ? basePrice * (values.customMonths) : basePrice);
   };
   
   const onFinish = (values) => {

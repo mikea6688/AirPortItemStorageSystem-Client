@@ -27,37 +27,46 @@ function OrderList() {
   // 分页参数
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 15,
+    pageSize: 10,
     total: 0,
   });
 
-  const fetchOrderData = () => {
-      setLoading(true);
-      getOrderList({
-        num: searchLockerId,
-        status: searchStatus,
-        pageIndex: pagination.current,
-        pageSize: pagination.pageSize
-      })
-        .then((res) => {
-          if (res && Array.isArray(res.orders)) {
-            setOrderData(res.orders.map(order => ({ ...order, key: order.id })));
-            setPagination({
-              ...pagination,
-              total: res.total,
-            });
-          }
-        })
-        .catch(() => {
-          message.error('获取订单数据失败');
-        })
-      setLoading(false);
-    };
+  const fetchOrderData = (page = pagination.current, pageSize = pagination.pageSize) => {
+    setLoading(true);
+    getOrderList({
+      num: searchLockerId,
+      status: searchStatus,
+      pageIndex: page,
+      pageSize: pageSize
+    })
+    .then((res) => {
+      console.log(res)
+      if (res && Array.isArray(res.orders)) {
+        setOrderData(res.orders.map(order => ({ ...order, key: order.id })));
+        setPagination(prev => ({
+          ...prev,
+          current: page,
+          pageSize: pageSize,
+          total: res.total
+        }));
+      }
+    })
+    .catch(() => {
+      message.error('获取订单数据失败');
+    })
+    setLoading(false);
+  };
+
+  //  处理分页
+  const handleTableChange = (pagination) => {
+    console.log(pagination)
+    fetchOrderData(pagination.current, pagination.pageSize);
+  };
 
   // init
-    useEffect(() => {
-      fetchOrderData();
-    }, [refreshKey]);
+  useEffect(() => {
+    fetchOrderData();
+  }, [refreshKey]);
 
   // 筛选数据
   const filteredOrders = orderData.filter(
@@ -203,7 +212,14 @@ function OrderList() {
       </Space>
 
       {/* 存储订单信息表格 */}
-      <Table dataSource={filteredOrders} columns={columns} rowKey="key" />
+      <Table
+        columns={columns}
+        dataSource={filteredOrders}
+        rowKey={(record) => record.id}
+        loading={loading}
+        pagination={pagination}
+        onChange={handleTableChange}
+      />
 
       {/* 凭证输入弹窗 */}
       <Modal

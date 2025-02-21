@@ -68,8 +68,8 @@ const LogisticsInfo = () => {
     },
     {
       title: '是否取出',
-      dataIndex: 'isExtracted',
-      key: 'isExtracted',
+      dataIndex: 'isTakenOut',
+      key: 'isTakenOut',
       render: (text) => (
         <Switch
           checked={text}
