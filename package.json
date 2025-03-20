@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "antd": "^5.23.3",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "dayjs": "^1.11.13",
-    "react": "18",
-    "react-dom": "18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "web-vitals": "^4.2.4"
@@ -37,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3"
   }
 }
