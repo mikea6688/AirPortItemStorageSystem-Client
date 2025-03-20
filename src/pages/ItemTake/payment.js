@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Space, Typography, Row, Col, message } from "antd";
+import { Button, Card, Space, Typography, Row, Col, message, Modal, Input  } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import { operateUserOrder, paymentOrder } from "../../api";
 import dayjs from 'dayjs';
@@ -16,6 +16,10 @@ function PaymentPage() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [source, setSource] = useState("");
   const [dayData, setDayData] = useState("");
+
+  // 新增状态管理
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [paymentPassword, setPaymentPassword] = useState("");
 
   const handleCancel = () => {
     if (source === "logistics") {
@@ -41,7 +45,8 @@ function PaymentPage() {
 
   const handlePayment = () => {
     paymentOrder({
-      orderId: queryParams.get('orderId')
+      orderId: queryParams.get('orderId'),
+      password: paymentPassword
     })
     .then((res)=>{
       if(res){
@@ -57,6 +62,17 @@ function PaymentPage() {
     .catch((error) =>{
       message.error(error.response.data.message)
     });
+  };
+
+  // 显示支付密码输入框
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  // 隐藏支付密码输入框
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+    setPaymentPassword(""); // 清空密码
   };
 
   // init
@@ -119,13 +135,28 @@ function PaymentPage() {
                     backgroundColor: "#1890ff",
                     borderColor: "#1890ff",
                   }}
-                  onClick={handlePayment}
+                  onClick={showModal} // 点击后显示弹窗
                 >
                   确定支付
                 </Button>
               </Space>
             </div>
           </Card>
+
+          
+           {/* 支付密码弹窗 */}
+           <Modal 
+             title="请输入支付密码"
+             visible={isModalVisible}
+             onOk={handlePayment}
+             onCancel={handleCloseModal}
+           >
+             <Input.Password 
+               value={paymentPassword} 
+               onChange={(e) => setPaymentPassword(e.target.value)} 
+               placeholder="请输入您的支付密码" 
+             />
+           </Modal>
         </Col>
       </Row>
     </div>
