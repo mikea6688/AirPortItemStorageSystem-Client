@@ -149,3 +149,11 @@ export const getLogisticsInfo = (data) =>{
 }
 
 //#endregion
+
+export const getAllStorageCategories = (data) => {
+    return http.get('/storage/category/list', data, {
+        headers: {
+            'userId': getUserId()
+        }
+    })
+}

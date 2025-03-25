@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { Layout, Form, Radio, Input, Checkbox, Button, Typography, Space, message } from "antd"
+import { Layout, Form, Radio, Input, Checkbox, Button, Typography, Space, message, Select } from "antd"
 import "./style/storage.css"
-import { addOrder, getStorageCabinetSettingList } from "../../api"
+import { addOrder, getAllStorageCategories, getStorageCabinetSettingList } from "../../api"
 
 const { Header, Content } = Layout
 const { Title } = Typography
@@ -13,6 +13,7 @@ function Storage() {
   const [isVip, setIsVip] = useState(false) 
   const [storageSettingData, setStorageSettingData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [categories, setCategories] = useState([]);
 
   const fetchStorageSettingData = () => {
     setLoading(true)
@@ -26,7 +27,22 @@ function Storage() {
       .catch((error) => {
         setLoading(false)
         message.error("获取柜子设置数据失败")
-      })
+    })
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const data = await getAllStorageCategories({
+        isAll: true
+      });
+      if (Array.isArray(data.storageCategories)) {
+        setCategories(data.storageCategories);
+      } else {
+        message.error('数据格式不正确');
+      }
+    } catch (error) {
+      message.error('无法加载物品类别');
+    }
   };
 
   // init
@@ -37,6 +53,7 @@ function Storage() {
             setIsVip(user.roleType === 'VIP' ? true : false);
         }
     fetchStorageSettingData()
+    fetchCategories()
   }, [])
 
   useEffect(() => {
@@ -76,7 +93,8 @@ function Storage() {
       name: values.itemName,
       isValuable: values.isValuable,
       useMemberRenewalService: values.useVipService === undefined ? false : values.useVipService,
-      estimatedPrice: estimatedPrice
+      estimatedPrice: estimatedPrice,
+      categoryId: values.itemCategory
     }
 
     const res = addOrder(addData)
@@ -146,6 +164,16 @@ function Storage() {
 
             <Form.Item label="物品名称" name="itemName" rules={[{ required: true, message: "请输入物品名称" }]}>
               <Input placeholder="请输入物品名称" />
+            </Form.Item>
+
+            <Form.Item label="物品类别" name="itemCategory">
+              <Select>
+                {categories.map(category => (
+                  <Select.Option key={category.id} value={category.id}>
+                    {category.categoryName}
+                  </Select.Option>
+                ))}
+              </Select>
             </Form.Item>
 
             <Form.Item name="isValuable" valuePropName="checked">

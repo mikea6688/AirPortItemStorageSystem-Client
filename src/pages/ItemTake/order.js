@@ -88,6 +88,10 @@ function OrderList() {
       dataIndex: "num",
     },
     {
+      title: "物品类型",
+      dataIndex: "categoryName"
+    },
+    {
       title: "存储时间",
       dataIndex: "storageDate",
     },
