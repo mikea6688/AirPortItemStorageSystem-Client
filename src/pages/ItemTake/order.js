@@ -138,19 +138,19 @@ function OrderList() {
             寄快递
           </Button>
           <Button
-            type="primary" danger
-            disabled={record.status == "Discarded" || record.status == "TakenOut"}
-            onClick={() => handleOperation("丢弃", record)}
-          >
-            丢弃
-          </Button>
-          <Button
             style={{ top: 3.2 }}
             color="cyan" variant="solid"
             disabled={record.status == "Discarded" || record.status == "TakenOut"}
             onClick={() => handleOperation("续费", record)}
           >
             续费
+          </Button>
+          <Button
+            type="primary" danger
+            disabled={record.status == "Discarded" || record.status == "TakenOut"}
+            onClick={() => handleOperation("丢弃", record)}
+          >
+            丢弃
           </Button>
         </Space>
       ),
