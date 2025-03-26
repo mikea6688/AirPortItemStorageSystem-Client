@@ -4,6 +4,7 @@ import './style/storageOrder.css';
 import { getOrderList } from '../../api';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import moment from 'moment';
 
 dayjs.extend(duration);
 
@@ -96,6 +97,7 @@ const StorageOrder = () => {
       title: '存储时间',
       dataIndex: 'storageDate',
       key: 'storageDate',
+      render: (text) => moment(text).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '已存时间',

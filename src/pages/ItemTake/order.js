@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom"; // 引入useHistory
 import { checkUserOrderVoucher, getOrderList } from "../../api";
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import moment from 'moment';
 
 dayjs.extend(duration);
 
@@ -94,6 +95,7 @@ function OrderList() {
     {
       title: "存储时间",
       dataIndex: "storageDate",
+      render: (text) => moment(text).format('YYYY-MM-DD HH:mm:ss'),
     },
     {
       title: '已存时间',
@@ -142,6 +144,14 @@ function OrderList() {
           >
             丢弃
           </Button>
+          <Button
+            style={{ top: 3.2 }}
+            color="cyan" variant="solid"
+            disabled={record.status == "Discarded" || record.status == "TakenOut"}
+            onClick={() => handleOperation("续费", record)}
+          >
+            续费
+          </Button>
         </Space>
       ),
     },
@@ -150,7 +160,6 @@ function OrderList() {
   const handleOperation = (action, record) => {
     setSelectedRow(record);
     setSelectedAction(action);
-
     setIsModalVisible(true);
   };
 
@@ -166,6 +175,8 @@ function OrderList() {
           navigate("/main/delivery?source=order&orderId=" + selectedRow.id);
         if (action === "丢弃")
           navigate("/main/discard?source=order&orderId=" + selectedRow.id);
+        if (action === "续费")
+          navigate("/main/Renewal?source=order&orderId=" + selectedRow.id);
       }
       else {
         message.error("输入凭证信息不正确");
