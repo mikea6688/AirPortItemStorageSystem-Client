@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Input, Select, Space, Tag, message } from "antd";
 import { useNavigate, useLocation } from "react-router-dom"; // 引入useHistory钩子
-import { checkUserOrderVoucher, getOrderList } from "../../api";
+import { checkUserOrderVoucher, getOrderList, renewalUserOrder } from "../../api";
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import moment from 'moment';
@@ -57,6 +57,25 @@ function OrderList() {
     })
     setLoading(false);
   };
+
+  //续期api
+  const handleRenewalOrder = (orderId) =>{
+    setLoading(true)
+    renewalUserOrder({
+      orderId : orderId
+    })
+    .then((res)=>{
+      if(res === 1){
+        message.info("已成功为您续期一周")
+      }else{
+        message.error("续期失败！")
+      }
+    })
+    .catch(() => {
+      message.error('接口异常，续期失败！');
+    })
+    setLoading(false);
+  }
 
   //  处理分页
   const handleTableChange = (pagination) => {
@@ -140,14 +159,14 @@ function OrderList() {
           <Button
             style={{ top: 3.2 }}
             color="cyan" variant="solid"
-            disabled={record.status == "Discarded" || record.status == "TakenOut"}
-            onClick={() => handleOperation("续费", record)}
+            disabled={record.status === "Discarded" || record.status === "TakenOut" || record.isRenewal}
+            onClick={() => handleOperation("续期", record)}
           >
-            续费
+            续期
           </Button>
           <Button
             type="primary" danger
-            disabled={record.status == "Discarded" || record.status == "TakenOut"}
+            disabled={record.status === "Discarded" || record.status === "TakenOut"}
             onClick={() => handleOperation("丢弃", record)}
           >
             丢弃
@@ -175,8 +194,8 @@ function OrderList() {
           navigate("/main/delivery?source=order&orderId=" + selectedRow.id);
         if (action === "丢弃")
           navigate("/main/discard?source=order&orderId=" + selectedRow.id);
-        if (action === "续费")
-          navigate("/main/Renewal?source=order&orderId=" + selectedRow.id);
+        if (action === "续期")
+          handleRenewalOrder(selectedRow.id)
       }
       else {
         message.error("输入凭证信息不正确");

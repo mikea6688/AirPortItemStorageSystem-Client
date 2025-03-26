@@ -1,3 +1,4 @@
+import { data } from '@remix-run/router';
 import dayjs from 'dayjs';
 import http from './axios'
 
@@ -154,6 +155,14 @@ export const getAllStorageCategories = (data) => {
     return http.get('/storage/category/list', data, {
         headers: {
             'userId': getUserId()
+        }
+    })
+}
+
+export const renewalUserOrder = (data) =>{
+    return http.post('/order/renewal', data,{
+        headers: {
+            'userId': getUserId(),
         }
     })
 }
