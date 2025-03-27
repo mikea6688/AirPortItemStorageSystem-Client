@@ -67,6 +67,7 @@ function OrderList() {
     .then((res)=>{
       if(res === 1){
         message.info("已成功为您续期一周")
+        fetchOrderData(1, pagination.pageSize)
       }else{
         message.error("续期失败！")
       }
@@ -124,6 +125,17 @@ function OrderList() {
         const d = dayjs.duration(seconds, "seconds");
         return `${d.days()}天 ${d.hours()}小时 ${d.minutes()}分钟`;
       }
+    },
+    {
+      title: '预计到期时间',
+      dataIndex: 'estimatedTime',
+      key: 'estimatedTime',
+      render: (text) => moment(text).format('YYYY-MM-DD'),
+    },
+    {
+      title: "是否续期",
+      dataIndex: "isRenewal",
+      render: (text) => (text === false ? "否" : "是")
     },
     {
       title: "花费",
